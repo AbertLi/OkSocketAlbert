@@ -55,7 +55,6 @@ public class IOThreadManager implements IIOManager<OkSocketOptions> {
     }
 
     private void initIO() {
-        assertHeaderProtocolNotEmpty();
         mReader = new ReaderImpl();
         mReader.initialize(mInputStream, mSender);
         mWriter = new WriterImpl();
@@ -118,7 +117,6 @@ public class IOThreadManager implements IIOManager<OkSocketOptions> {
             mCurrentThreadMode = mOkOptions.getIOThreadMode();
         }
         assertTheThreadModeNotChanged();
-        assertHeaderProtocolNotEmpty();
 
         mWriter.setOption(mOkOptions);
         mReader.setOption(mOkOptions);
@@ -138,17 +136,6 @@ public class IOThreadManager implements IIOManager<OkSocketOptions> {
     public synchronized void close(Exception e) {
         shutdownAllThread(e);
         mCurrentThreadMode = null;
-    }
-
-    private void assertHeaderProtocolNotEmpty() {
-        IReaderProtocol protocol = mOkOptions.getReaderProtocol();
-        if (protocol == null) {
-            throw new IllegalArgumentException("The reader protocol can not be Null.");
-        }
-
-        if (protocol.getHeaderLength() == 0) {
-            throw new IllegalArgumentException("The header length can not be zero.");
-        }
     }
 
     private void assertTheThreadModeNotChanged() {

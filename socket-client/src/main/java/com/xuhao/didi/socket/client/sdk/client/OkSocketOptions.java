@@ -1,12 +1,10 @@
 package com.xuhao.didi.socket.client.sdk.client;
 
 import com.xuhao.didi.core.iocore.interfaces.IIOCoreOptions;
-import com.xuhao.didi.core.protocol.IReaderProtocol;
 import com.xuhao.didi.socket.client.impl.client.action.ActionDispatcher;
 import com.xuhao.didi.socket.client.sdk.client.connection.AbsReconnectionManager;
 import com.xuhao.didi.socket.client.sdk.client.connection.DefaultReconnectManager;
 import com.xuhao.didi.socket.client.sdk.client.connection.abilities.IConfiguration;
-import com.xuhao.didi.socket.common.interfaces.default_protocol.DefaultNormalReaderProtocol;
 
 import java.nio.ByteOrder;
 
@@ -40,14 +38,7 @@ public class OkSocketOptions implements IIOCoreOptions {
      * 写入Socket管道中给服务器的字节序
      */
     private ByteOrder mWriteOrder;
-    /**
-     * 从Socket管道中读取字节序时的字节序
-     */
-    private ByteOrder mReadByteOrder;
-    /**
-     * Socket通讯中,业务层定义的数据包包头格式
-     */
-    private IReaderProtocol mReaderProtocol;
+
     /**
      * 发送给服务器时单个数据包的总长度
      */
@@ -155,16 +146,6 @@ public class OkSocketOptions implements IIOCoreOptions {
             return this;
         }
 
-        /**
-         * Socket通讯中,业务层定义的数据包包头格式<br>
-         * 默认的为{@link DefaultNormalReaderProtocol}<br>
-         *
-         * @param readerProtocol {@link IReaderProtocol} 通讯头协议
-         */
-        public Builder setReaderProtocol(IReaderProtocol readerProtocol) {
-            mOptions.mReaderProtocol = readerProtocol;
-            return this;
-        }
 
         /**
          * 设置脉搏间隔频率<br>
@@ -229,18 +210,6 @@ public class OkSocketOptions implements IIOCoreOptions {
             mOptions.mWriteOrder = writeOrder;
             return this;
         }
-
-        /**
-         * 设置输入Socket管道中读取时的字节序<br>
-         * 默认是:大端字节序<br>
-         *
-         * @param readByteOrder {@link ByteOrder} 字节序
-         */
-        public Builder setReadByteOrder(ByteOrder readByteOrder) {
-            mOptions.mReadByteOrder = readByteOrder;
-            return this;
-        }
-
 
         /**
          * 设置连接超时时间,该超时时间是链路上从开始连接到连接上的时间
@@ -342,20 +311,12 @@ public class OkSocketOptions implements IIOCoreOptions {
         return mWriteOrder;
     }
 
-    @Override
-    public IReaderProtocol getReaderProtocol() {
-        return mReaderProtocol;
-    }
 
     @Override
     public int getMaxReadDataByte() {
         return mMaxReadDataByte;
     }
 
-    @Override
-    public ByteOrder getReadByteOrder() {
-        return mReadByteOrder;
-    }
 
     public ThreadModeToken getCallbackThreadModeToken() {
         return mCallbackThreadModeToken;
@@ -369,11 +330,9 @@ public class OkSocketOptions implements IIOCoreOptions {
         OkSocketOptions okOptions = new OkSocketOptions();
         okOptions.mPulseFrequency = 5 * 1000;
         okOptions.mIOThreadMode = IOThreadMode.DUPLEX;
-        okOptions.mReaderProtocol = new DefaultNormalReaderProtocol();
-        okOptions.mMaxReadDataByte = 1024*1024;
+        okOptions.mMaxReadDataByte = 1024 * 1024;
         okOptions.mConnectTimeoutSecond = 3;
         okOptions.mWritePackageBytes = 100;
-        okOptions.mReadByteOrder = ByteOrder.BIG_ENDIAN;
         okOptions.mWriteOrder = ByteOrder.BIG_ENDIAN;
         okOptions.isConnectionHolden = true;
         okOptions.mPulseFeedLoseTimes = 5;

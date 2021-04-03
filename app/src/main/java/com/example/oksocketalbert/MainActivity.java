@@ -48,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
         OkSocketOptions okSocketOptions = new OkSocketOptions
                 .Builder(OkSocketOptions.getDefault())
                 .setMaxReadDataByte(2000)//读取时候的字符byte数
-                .setReaderProtocol(new NormalReaderProtocol())
                 .build();
         return okSocketOptions;
     }
