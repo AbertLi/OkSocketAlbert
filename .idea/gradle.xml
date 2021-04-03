@@ -15,7 +15,6 @@
             <option value="$PROJECT_DIR$/socket-client" />
             <option value="$PROJECT_DIR$/socket-common-interface" />
             <option value="$PROJECT_DIR$/socket-core" />
-            <option value="$PROJECT_DIR$/socket-server" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />

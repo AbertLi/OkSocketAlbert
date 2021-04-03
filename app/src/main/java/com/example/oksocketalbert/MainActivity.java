@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
+import com.example.oksocketalbert.ende.DectyptionImp;
 import com.xuhao.didi.core.iocore.interfaces.IPulseSendable;
 import com.xuhao.didi.core.iocore.interfaces.ISendable;
 import com.xuhao.didi.core.pojo.OriginalData;
@@ -23,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
     private IConnectionManager manager;
     private ConnectionInfo connInfo;
     private String ip;
+
+    DectyptionImp dectyptionImp = new DectyptionImp();
 
 
     @Override
@@ -44,8 +47,8 @@ public class MainActivity extends AppCompatActivity {
     public OkSocketOptions getOptions(){
         OkSocketOptions okSocketOptions = new OkSocketOptions
                 .Builder(OkSocketOptions.getDefault())
-                .setMaxReadDataMB(10)//读取时候的字符兆数
-                .setWritePackageBytes(100000)//写入时候的字节数组长度。
+                .setMaxReadDataByte(2000)//读取时候的字符byte数
+                .setReaderProtocol(new NormalReaderProtocol())
                 .build();
         return okSocketOptions;
     }
@@ -114,6 +117,7 @@ public class MainActivity extends AppCompatActivity {
         public void onSocketReadResponse(ConnectionInfo info, String action, OriginalData data) {
             super.onSocketReadResponse(info, action, data);
             Log.e(TAG, "onSocketReadResponse:" + action +" data len = "+data.getBodyBytes().length);
+            Log.e(TAG, "onSocketReadResponse:  解密的结果 = "+new String(dectyptionImp.decodeToByteArray(data.getBodyBytes())));
         }
 
         @Override

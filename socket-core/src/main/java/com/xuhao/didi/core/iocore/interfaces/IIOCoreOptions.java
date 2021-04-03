@@ -8,13 +8,11 @@ public interface IIOCoreOptions {
 
     ByteOrder getReadByteOrder();
 
-    int getMaxReadDataMB();
+    int getMaxReadDataByte();
 
     IReaderProtocol getReaderProtocol();
 
     ByteOrder getWriteByteOrder();
-
-    int getReadPackageBytes();
 
     int getWritePackageBytes();
 

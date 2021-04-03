@@ -52,10 +52,7 @@ public class OkSocketOptions implements IIOCoreOptions {
      * 发送给服务器时单个数据包的总长度
      */
     private int mWritePackageBytes;
-    /**
-     * 从服务器读取时单次读取的缓存字节长度,数值越大,读取效率越高.但是相应的系统消耗将越大
-     */
-    private int mReadPackageBytes;
+
     /**
      * 脉搏频率单位是毫秒
      */
@@ -74,7 +71,7 @@ public class OkSocketOptions implements IIOCoreOptions {
      * 最大读取数据的兆数(MB)<br>
      * 防止服务器返回数据体过大的数据导致前端内存溢出.
      */
-    private int mMaxReadDataMB;
+    private int mMaxReadDataByte;
     /**
      * 重新连接管理器
      */
@@ -138,13 +135,13 @@ public class OkSocketOptions implements IIOCoreOptions {
         }
 
         /**
-         * 最大读取数据的兆数(MB)<br>
+         * 最大读取数据的字节数)<br>
          * 防止服务器返回数据体过大的数据导致前端内存溢出<br>
          *
-         * @param maxReadDataMB 兆字节为单位
+         * @param maxReadDataByte 字节为单位
          */
-        public Builder setMaxReadDataMB(int maxReadDataMB) {
-            mOptions.mMaxReadDataMB = maxReadDataMB;
+        public Builder setMaxReadDataByte(int maxReadDataByte) {
+            mOptions.mMaxReadDataByte = maxReadDataByte;
             return this;
         }
 
@@ -244,25 +241,6 @@ public class OkSocketOptions implements IIOCoreOptions {
             return this;
         }
 
-        /**
-         * 发送给服务器时单个数据包的总长度
-         *
-         * @param writePackageBytes 单个数据包的总大小
-         */
-        public Builder setWritePackageBytes(int writePackageBytes) {
-            mOptions.mWritePackageBytes = writePackageBytes;
-            return this;
-        }
-
-        /**
-         * 从服务器读取时单个数据包的总长度
-         *
-         * @param readPackageBytes 单个数据包的总大小
-         */
-        public Builder setReadPackageBytes(int readPackageBytes) {
-            mOptions.mReadPackageBytes = readPackageBytes;
-            return this;
-        }
 
         /**
          * 设置连接超时时间,该超时时间是链路上从开始连接到连接上的时间
@@ -360,11 +338,6 @@ public class OkSocketOptions implements IIOCoreOptions {
     }
 
     @Override
-    public int getReadPackageBytes() {
-        return mReadPackageBytes;
-    }
-
-    @Override
     public ByteOrder getWriteByteOrder() {
         return mWriteOrder;
     }
@@ -375,8 +348,8 @@ public class OkSocketOptions implements IIOCoreOptions {
     }
 
     @Override
-    public int getMaxReadDataMB() {
-        return mMaxReadDataMB;
+    public int getMaxReadDataByte() {
+        return mMaxReadDataByte;
     }
 
     @Override
@@ -397,10 +370,9 @@ public class OkSocketOptions implements IIOCoreOptions {
         okOptions.mPulseFrequency = 5 * 1000;
         okOptions.mIOThreadMode = IOThreadMode.DUPLEX;
         okOptions.mReaderProtocol = new DefaultNormalReaderProtocol();
-        okOptions.mMaxReadDataMB = 5;
+        okOptions.mMaxReadDataByte = 1024*1024;
         okOptions.mConnectTimeoutSecond = 3;
         okOptions.mWritePackageBytes = 100;
-        okOptions.mReadPackageBytes = 50;
         okOptions.mReadByteOrder = ByteOrder.BIG_ENDIAN;
         okOptions.mWriteOrder = ByteOrder.BIG_ENDIAN;
         okOptions.isConnectionHolden = true;
