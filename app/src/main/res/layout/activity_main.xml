@@ -7,10 +7,15 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:background="@color/black"
         android:layout_width="wrap_content"
+        android:padding="10dp"
+        android:gravity="center"
+        android:textSize="58sp"
         android:layout_height="wrap_content"
         android:text="senData"
         android:onClick="sendData"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

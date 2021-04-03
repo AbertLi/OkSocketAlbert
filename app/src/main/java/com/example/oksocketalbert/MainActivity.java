@@ -113,7 +113,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onSocketReadResponse(ConnectionInfo info, String action, OriginalData data) {
             super.onSocketReadResponse(info, action, data);
-            Log.e(TAG, "onSocketReadResponse:" + action);
+            Log.e(TAG, "onSocketReadResponse:" + action +" data len = "+data.getBodyBytes().length);
         }
 
         @Override
