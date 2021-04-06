@@ -9,14 +9,14 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.oksocketalbert.ende.DectyptionImp;
-import com.xuhao.didi.core.iocore.interfaces.IPulseSendable;
-import com.xuhao.didi.core.iocore.interfaces.ISendable;
-import com.xuhao.didi.core.pojo.OriginalData;
-import com.xuhao.didi.socket.client.sdk.OkSocket;
-import com.xuhao.didi.socket.client.sdk.client.ConnectionInfo;
-import com.xuhao.didi.socket.client.sdk.client.OkSocketOptions;
-import com.xuhao.didi.socket.client.sdk.client.action.SocketActionAdapter;
-import com.xuhao.didi.socket.client.sdk.client.connection.IConnectionManager;
+import com.franklin.client.sdk.OkSocket;
+import com.franklin.client.sdk.client.ConnectionInfo;
+import com.franklin.client.sdk.client.OkSocketOptions;
+import com.franklin.client.sdk.client.action.SocketActionAdapter;
+import com.franklin.client.sdk.client.connection.IConnectionManager;
+import com.franklin.core.iocore.interfaces.IPulseSendable;
+import com.franklin.core.iocore.interfaces.ISendable;
+import com.franklin.core.pojo.OriginalData;
 
 public class MainActivity extends AppCompatActivity {
     private String TAG = "MainActivity";

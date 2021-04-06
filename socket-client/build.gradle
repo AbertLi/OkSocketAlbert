@@ -1,7 +1,7 @@
 apply from: '../common_library.gradle'
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    api project(path: ':socket-common-interface')
+//    api project(path: ':socket-common-interface')
 }
 
 //apply from: '../publish.gradle'

@@ -1,6 +1,6 @@
 include ':app'
 include ':socket-client'
-include ':socket-common-interface'
-include ':socket-core'
+//include ':socket-common-interface'
+//include ':socket-core'
 //include ':socket-server'
 rootProject.name = "OkSocketAlbert"
